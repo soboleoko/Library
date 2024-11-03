@@ -45,24 +45,24 @@ public class BookController {
         bookService.deleteBook(bookID);
     }
 
-    @GetMapping("/books/search?title={title}")
+    @GetMapping("/books/search")
     public List<Book> findBookByTitle(@RequestParam String title) {
         return bookService.findBookByTitle(title);
     }
 
-    @GetMapping("/books/search?author={author}&year={year}")
+    @GetMapping("/books/filter")
     public List<Book> filterBooksByAuthorOrYear(@RequestParam(required = false) String author
             , @RequestParam(required = false) Integer year) {
         return bookService.getFilteredBooks(author, year);
     }
 
-    @PatchMapping("/books/{bookID}/rating")
+    @PatchMapping("/books/{bookID}/update-rating")
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Book updateBookRating(@PathVariable Integer bookID, @RequestBody double rating) {
+    public Book updateBookRating(@PathVariable Integer bookID, @RequestBody Double rating) {
         return bookService.updateRating(bookID, rating);
     }
 
-    @GetMapping("/books/top-rated?limit={limit}")
+    @GetMapping("/books/top-rated")
     public List<Book> getTopRating(@RequestParam Integer limit) {
         return bookService.getTopRating(limit);
     }

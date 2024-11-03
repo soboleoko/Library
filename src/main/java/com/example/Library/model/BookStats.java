@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 
 public class BookStats {
-    private double averageRating;
+    private Double averageRating;
     private Integer booksAmount;
     private Long uniqueAuthorsAmount;
 }
