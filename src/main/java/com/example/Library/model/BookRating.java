@@ -5,10 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
-@Data
 @NoArgsConstructor
-public class BookStats {
-    private Double averageRating;
-    private Integer booksAmount;
-    private Long uniqueAuthorsAmount;
+@Data
+public class BookRating {
+    private Double rating;
 }

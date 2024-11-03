@@ -3,6 +3,7 @@ package com.example.Library.service;
 import com.example.Library.exception.BookBadRequestException;
 import com.example.Library.exception.BookNotFoundException;
 import com.example.Library.model.Book;
+import com.example.Library.model.BookRating;
 import com.example.Library.model.BookStats;
 import com.example.Library.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
@@ -47,8 +48,8 @@ public class BookService {
         return bookRepository.filterBooks(author, year);
     }
 
-    public Book updateRating(Integer bookID, Double rating) {
-        return bookRepository.updateRating(bookID, rating).orElseThrow(() ->
+    public Book updateRating(Integer bookID, BookRating rating) {
+        return bookRepository.updateRating(bookID, rating.getRating()).orElseThrow(() ->
                 new BookBadRequestException("Nie znaleziono książki o podanym ID lub zakres oceny " +
                         "jest spoza pomiędzy 1.0 i 5.0", HttpStatus.BAD_REQUEST));
     }

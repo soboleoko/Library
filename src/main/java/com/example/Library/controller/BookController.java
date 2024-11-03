@@ -1,6 +1,7 @@
 package com.example.Library.controller;
 
 import com.example.Library.model.Book;
+import com.example.Library.model.BookRating;
 import com.example.Library.model.BookStats;
 import com.example.Library.service.BookService;
 import lombok.RequiredArgsConstructor;
@@ -9,10 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @RestController
 @RequiredArgsConstructor
-
 public class BookController {
     private final BookService bookService;
 
@@ -28,19 +27,17 @@ public class BookController {
     }
 
     @GetMapping("/books/{bookID}")
-    @ResponseStatus(HttpStatus.NOT_FOUND)
     public Book getBooksByID(@PathVariable Integer bookID) {
         return bookService.getBookByID(bookID);
     }
 
     @PutMapping("/books/{bookID}")
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public Book updateBook(@RequestBody Book newBookData, @PathVariable Integer bookID) {
+    public Book updateBook(@PathVariable Integer bookID, @RequestBody Book newBookData) {
         return bookService.updateBook(newBookData, bookID);
     }
 
     @DeleteMapping("/books/{bookID}")
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteBook(@PathVariable Integer bookID) {
         bookService.deleteBook(bookID);
     }
@@ -57,8 +54,7 @@ public class BookController {
     }
 
     @PatchMapping("/books/{bookID}/update-rating")
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Book updateBookRating(@PathVariable Integer bookID, @RequestBody Double rating) {
+    public Book updateBookRating(@PathVariable Integer bookID, @RequestBody BookRating rating) {
         return bookService.updateRating(bookID, rating);
     }
 
