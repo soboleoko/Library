@@ -1,12 +1,15 @@
 package com.example.Library.exception;
 
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
+@Getter
 public class BookNotFoundException extends RuntimeException {
-    HttpStatus statusHTPP;
+
+    public final HttpStatus httpStatus;
 
     public BookNotFoundException(String message, HttpStatus statusHTPP) {
         super(message);
-        this.statusHTPP = statusHTPP;
+        this.httpStatus = statusHTPP;
     }
 }

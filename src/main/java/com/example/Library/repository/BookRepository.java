@@ -16,7 +16,6 @@ public class BookRepository {
     private final List<Book> books = new ArrayList<>();
 
     public Book addBook(Book book) {
-
         Integer maxID = books.stream()
                 .map(Book::getBookID)
                 .max(Integer::compare)

@@ -4,13 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @AllArgsConstructor
+@Data
 @NoArgsConstructor
-public class Book {
-    private Integer bookID;
-    private String title;
-    private String author;
-    private Integer year;
-    private Double rating;
+public class BookStatsDTO {
+    private Double averageRating;
+    private Integer booksAmount;
+    private Long uniqueAuthorsAmount;
 }

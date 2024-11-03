@@ -1,8 +1,8 @@
 package com.example.Library.controller;
 
-import com.example.Library.model.Book;
-import com.example.Library.model.BookRating;
-import com.example.Library.model.BookStats;
+import com.example.Library.mapper.BookMapper;
+import com.example.Library.mapper.BookStatsMapper;
+import com.example.Library.model.*;
 import com.example.Library.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,26 +14,28 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BookController {
     private final BookService bookService;
+    private final BookMapper bookMapper;
+    private final BookStatsMapper bookStatsMapper;
 
     @PostMapping("/books")
     @ResponseStatus(HttpStatus.CREATED)
-    public Book addBook(@RequestBody Book book) {
-        return bookService.addBook(book);
+    public BookDTO addBook(@RequestBody Book book) {
+        return bookMapper.mapToBookDTO(bookService.addBook(book));
     }
 
     @GetMapping("/books")
-    public List<Book> getBooks() {
-        return bookService.getBooks();
+    public List<BookDTO> getBooks() {
+        return bookMapper.mapToBookDTOList(bookService.getBooks());
     }
 
     @GetMapping("/books/{bookID}")
-    public Book getBooksByID(@PathVariable Integer bookID) {
-        return bookService.getBookByID(bookID);
+    public BookDTO getBooksByID(@PathVariable Integer bookID) {
+        return bookMapper.mapToBookDTO(bookService.getBookByID(bookID));
     }
 
     @PutMapping("/books/{bookID}")
-    public Book updateBook(@PathVariable Integer bookID, @RequestBody Book newBookData) {
-        return bookService.updateBook(newBookData, bookID);
+    public BookDTO updateBook(@PathVariable Integer bookID, @RequestBody Book newBookData) {
+        return bookMapper.mapToBookDTO(bookService.updateBook(newBookData, bookID));
     }
 
     @DeleteMapping("/books/{bookID}")
@@ -43,28 +45,28 @@ public class BookController {
     }
 
     @GetMapping("/books/search")
-    public List<Book> findBookByTitle(@RequestParam String title) {
-        return bookService.findBookByTitle(title);
+    public List<BookDTO> findBookByTitle(@RequestParam String title) {
+        return bookMapper.mapToBookDTOList(bookService.findBookByTitle(title));
     }
 
     @GetMapping("/books/filter")
-    public List<Book> filterBooksByAuthorOrYear(@RequestParam(required = false) String author
-            , @RequestParam(required = false) Integer year) {
-        return bookService.getFilteredBooks(author, year);
+    public List<BookDTO> filterBooksByAuthorOrYear(@RequestParam(required = false) String author,
+                                                @RequestParam(required = false) Integer year) {
+        return bookMapper.mapToBookDTOList(bookService.getFilteredBooks(author, year));
     }
 
     @PatchMapping("/books/{bookID}/update-rating")
-    public Book updateBookRating(@PathVariable Integer bookID, @RequestBody BookRating rating) {
-        return bookService.updateRating(bookID, rating);
+    public BookDTO updateBookRating(@PathVariable Integer bookID, @RequestBody BookRating rating) {
+        return bookMapper.mapToBookDTO(bookService.updateRating(bookID, rating));
     }
 
     @GetMapping("/books/top-rated")
-    public List<Book> getTopRating(@RequestParam Integer limit) {
-        return bookService.getTopRating(limit);
+    public List<BookDTO> getTopRating(@RequestParam Integer limit) {
+        return bookMapper.mapToBookDTOList(bookService.getTopRating(limit));
     }
 
     @GetMapping("/books/stats")
-    public BookStats getBooksStats() {
-        return bookService.getBooksStats();
+    public BookStatsDTO getBooksStats() {
+        return bookStatsMapper.mapToBookStatsDTO(bookService.getBooksStats());
     }
 }
