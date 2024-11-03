@@ -58,7 +58,7 @@ public class BookRepository {
     public List<Book> findBookByTitle(String title) {
         List<Book> foundBooks = new ArrayList<>();
         for (Book book : books) {
-            if (book.getTitle().toLowerCase().contains(title.toLowerCase())) {
+            if (book.getTitle().toLowerCase().contains(title.toLowerCase().trim())) {
                 foundBooks.add(book);
             }
         }
@@ -95,7 +95,7 @@ public class BookRepository {
 
         int totalBooks = books.size();
 
-        int uniqueAuthors = (int) books.stream()
+        long uniqueAuthors = books.stream()
                 .map(Book::getAuthor)
                 .distinct()
                 .count();

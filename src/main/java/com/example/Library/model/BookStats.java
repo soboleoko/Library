@@ -7,5 +7,5 @@ import lombok.AllArgsConstructor;
 public class BookStats {
     private double averageRating;
     private Integer booksAmount;
-    private Integer uniqueAuthorsAmount;
+    private Long uniqueAuthorsAmount;
 }

@@ -57,6 +57,7 @@ public class BookController {
     }
 
     @PatchMapping("/books/{bookID}/rating")
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Book updateBookRating(@PathVariable Integer bookID, @RequestBody double rating) {
         return bookService.updateRating(bookID, rating);
     }
